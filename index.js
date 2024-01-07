@@ -18,7 +18,7 @@ app.post('/usuarios', (request, response) => {
     senha,
   };
   usuarios.push(payload);
-  return response.status(201).json(payload);
+  return response.status(201).json(usuarios);
 });
 
 app.listen(3000, () => {
