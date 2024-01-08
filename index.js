@@ -6,18 +6,34 @@ const app = express();
 let usuarios = [];
 
 app.use(express.json());
+
+function updateUserAttrs({ nome, email, dataDeAniversario, morada, telefone, stack, sobre }) {
+  usuarios[index].nome = nome || usuarios[index].nome;
+  usuarios[index].email = email || usuarios[index].email;
+  usuarios[index].dataDeAniversario = dataDeAniversario || usuarios[index].dataDeAniversario;
+  usuarios[index].morada = morada || usuarios[index].morada;
+  usuarios[index].telefone = telefone || usuarios[index].telefone;
+  usuarios[index].stack = stack || usuarios[index].stack;
+  usuarios[index].sobre = sobre || usuarios[index].sobre;
+}
+function findIndexWithID(id) {
+  const index = usuarios.findIndex((usuarios) => {
+    return usuarios.id === id;
+  });
+  return index;
+}
+
 app.get('/usuarios', (request, response) => {
   return response.status(200).json(usuarios);
 });
 
 app.post('/usuarios', (request, response) => {
-  const { nome, email, senha, dataDeAniversario, morada, telefone, stack, sobre } = request.body;
+  const { nome, email, dataDeAniversario, morada, telefone, stack, sobre } = request.body;
   const id = crypto.randomUUID().toString();
   const payload = {
     id,
     nome,
     email,
-    senha,
     dataDeAniversario,
     morada,
     telefone,
@@ -30,14 +46,13 @@ app.post('/usuarios', (request, response) => {
 
 app.put('/usuarios/:id', (request, response) => {
   const { id } = request.params;
-  const { nome, email, senha, dataDeAniversario, morada, telefone, stack, sobre } = request.body;
+  const { nome, email, dataDeAniversario, morada, telefone, stack, sobre } = request.body;
   for (let i = 0; i < usuarios.length; i++) {
     if (usuarios[i].id === id) {
       const payload = {
         id,
         nome,
         email,
-        senha,
         dataDeAniversario,
         morada,
         telefone,
@@ -54,26 +69,23 @@ app.put('/usuarios/:id', (request, response) => {
 app.patch('/usuarios/:id', (request, response) => {
   const { id } = request.params;
   const { nome, email, dataDeAniversario, morada, telefone, stack, sobre } = request.body;
-  const index = usuarios.findIndex((usuarios) => {
-    return usuarios.id === id;
-  });
-
-  usuarios[index].nome = nome || usuarios[index].nome;
-  usuarios[index].email = email || usuarios[index].email;
-  usuarios[index].dataDeAniversario = dataDeAniversario || usuarios[index].dataDeAniversario;
-  usuarios[index].morada = morada || usuarios[index].morada;
-  usuarios[index].telefone = telefone || usuarios[index].telefone;
-  usuarios[index].stack = stack || usuarios[index].stack;
-  usuarios[index].sobre = sobre || usuarios[index].sobre;
-
+  const index = findIndexWithID(id);
+  const payload = {
+    nome,
+    email,
+    dataDeAniversario,
+    morada,
+    telefone,
+    stack,
+    sobre,
+  };
+  updateUserAttrs(payload);
   return response.status(200).json(usuarios[index]);
 });
 
 app.delete('/usuarios/:id', (request, response) => {
   const { id } = request.params;
-  const index = usuarios.findIndex((usuarios) => {
-    return usuarios.id === id;
-  });
+  const index = findIndexWithID(id);
   usuarios.splice(index, 1);
   return response.sendStatus(204);
 });
