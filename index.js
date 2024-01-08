@@ -56,15 +56,6 @@ app.patch('/usuarios/:id', (request, response) => {
   const index = usuarios.findIndex((usuarios) => {
     return usuarios.id === id;
   });
-  const payload = {
-    nome,
-    email,
-    dataDeAniversario,
-    morada,
-    telefone,
-    stack,
-    sobre,
-  };
   usuarios[index].nome = nome || usuarios[index].nome;
   usuarios[index].email = email || usuarios[index].email;
   usuarios[index].dataDeAniversario = dataDeAniversario || usuarios[index].dataDeAniversario;
