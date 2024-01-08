@@ -4,7 +4,35 @@ POST http://localhost:3000/usuarios
 content-type: application/json
 
 {
-    "nome": "marcell",
-    "email": "<EMAIL>",
-    "senha": "123"
+    "nome":"john doe",
+    "email":"john.doe@gmail.com",
+    "dataDeAniversario":"12/03/1999",
+    "morada":"Logo ali",
+    "telefone":"123123",
+    "stack":"Front-end",
+    "sobre":"Sou lindo"
 }
+###
+PUT http://localhost:3000/usuarios/44924836-3e56-4219-8f8d-117ae2513e40
+Content-Type: application/json
+
+{
+    "nome":"john doe",
+    "email":"john.doe@gmail.com",
+    "dataDeAniversario":"12/03/1999",
+    "morada":"Logo ali",
+    "telefone":"123123",
+    "stack":"Front-end",
+    "sobre":"Sou lindo"
+}
+###
+PATCH http://localhost:3000/usuarios/44924836-3e56-4219-8f8d-117ae2513e40
+Content-Type: application/json
+
+{
+    "telefone":"0990123901",
+    "stack":"Back-end",
+    "sobre":"Sou feio"
+}
+###
+DELETE http://localhost:3000/usuarios/44924836-3e56-4219-8f8d-117ae2513e40
