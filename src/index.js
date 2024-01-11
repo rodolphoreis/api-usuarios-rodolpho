@@ -10,14 +10,13 @@ app.use(express.json());
 app.use(cors());
 
 function updateUserAttrs(index, payload) {
-  usuarios[index].nome = payload.nome || usuarios[index].nome;
-  usuarios[index].email = payload.email || usuarios[index].email;
-  usuarios[index].dataDeAniversario =
-    payload.dataDeAniversario || usuarios[index].dataDeAniversario;
-  usuarios[index].morada = payload.morada || usuarios[index].morada;
-  usuarios[index].telefone = payload.telefone || usuarios[index].telefone;
-  usuarios[index].stack = payload.stack || usuarios[index].stack;
-  usuarios[index].sobre = payload.sobre || usuarios[index].sobre;
+  usuarios[index].nome = payload.nome;
+  usuarios[index].email = payload.email;
+  usuarios[index].dataDeAniversario = payload.dataDeAniversario;
+  usuarios[index].morada = payload.morada;
+  usuarios[index].telefone = payload.telefone;
+  usuarios[index].stack = payload.stack;
+  usuarios[index].sobre = payload.sobre;
 }
 
 function findIndexWithID(id) {
@@ -90,13 +89,13 @@ app.patch('/usuarios/:id', (request, response) => {
     const { nome, email, dataDeAniversario, morada, telefone, stack, sobre } = request.body;
     const index = findIndexWithID(id);
     const payload = {
-      nome,
-      email,
-      dataDeAniversario,
-      morada,
-      telefone,
-      stack,
-      sobre,
+      nome: nome || usuarios[index].nome,
+      email: email || usuarios[index].email,
+      dataDeAniversario: dataDeAniversario || usuarios[index].dataDeAniversario,
+      morada: morada || usuarios[index].morada,
+      telefone: telefone || usuarios[index].telefone,
+      stack: stack || usuarios[index].stack,
+      sobre: sobre || usuarios[index].sobre,
     };
     updateUserAttrs(index, payload);
     return response.status(200).json(usuarios[index]);
