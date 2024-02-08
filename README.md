@@ -18,8 +18,6 @@ Bem-vindo ao backend do Projeto Formulário de Candidatura! Este servidor Node.j
 2. Instale as dependências: `npm install`
 3. Inicie o servidor: `npm start`
 
-O servidor estará disponível em [http://localhost:3000](http://localhost:3000).
-
 ## Desenvolvedor
 
 Este backend foi criado em conjunto com o desenvolvedor [Marcell](https://github.com/marcelldac). Agradeço muito pela colaboração!
